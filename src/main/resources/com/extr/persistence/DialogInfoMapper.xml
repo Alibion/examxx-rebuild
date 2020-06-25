@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.extr.persistence.DialogInfoMapper">
+
+	<!-- Dialog -->
+	<insert id="insertDialog" useGeneratedKeys="true" keyProperty="dialogID"
+		parameterType="com.extr.domain.question.DialogInfo">
+		insert into
+		et_dialog_info(questionJapanese,answerJapanese1,questionChinese,answerChinese1)
+		value
+		(#{questionJapanese},#{answerJapanese1},#{questionChinese},#{answerChinese1})
+	</insert>
+
+	<select id="getDialogInfoByDialogID" resultType="com.extr.domain.question.DialogInfo">
+		select
+		a.dialogID,
+		a.questionJapanese, a.answerJapanese1, a.answerJapanese2,
+		a.answerJapanese3, a.questionChinese, a.answerChinese1,
+		a.answerChinese2, a.answerChinese3
+		from
+		et_dialog_info a
+		where
+		a.dialogID=#{dialogID}
+	</select>
+
+	<select id="getAllDialogInfo" resultType="com.extr.domain.question.DialogInfo">
+		select
+		a.dialogID,
+		a.questionJapanese, a.answerJapanese1, a.answerJapanese2,
+		a.answerJapanese3, a.questionChinese, a.answerChinese1,
+		a.answerChinese2, a.answerChinese3
+		from
+		et_dialog_info a
+		where
+		a.dialogClassifyID=#{dialogClassifyID}
+	</select>
+
+	<select id="getDialogClassifyName" resultType="com.extr.domain.question.DialogClassify">
+		select
+		a.dialogClassifyName
+		from
+		et_dialog_classify a
+		where
+		a.dialogClassifyID=#{dialogClassifyID}
+	</select>
+
+	<select id="getAllDialogClassify" resultType="com.extr.domain.question.DialogClassify">
+		select
+		a.dialogClassifyID,
+		a.dialogClassifyName
+		from
+		et_dialog_classify a
+	</select>
+
+</mapper>
